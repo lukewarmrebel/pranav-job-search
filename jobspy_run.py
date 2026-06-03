@@ -19,7 +19,7 @@ SEARCHES = [
 SITES = ["linkedin", "naukri", "indeed", "glassdoor"]
 RESULTS_PER_SITE = 15   # × 4 sites × 6 searches = up to 360 raw rows
 HOURS_OLD = 48          # 48h catches timezone lag; Claude filters to 24h after
-DESC_MAX_CHARS = 2500   # keep JSON file size manageable
+DESC_MAX_CHARS = 6000   # increased from 2500 — covers full JD requirements section
 
 
 def safe_val(v):
