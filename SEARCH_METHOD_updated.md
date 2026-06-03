@@ -9,7 +9,7 @@
 
 Fetch today's pre-scraped jobs from the GitHub repo using WebFetch:
 
-    URL: https://raw.githubusercontent.com/YOUR_GITHUB_USERNAME/pranav-job-search/main/jobs_raw.json
+    URL: https://raw.githubusercontent.com/lukewarmrebel/pranav-job-search/main/jobs_raw.json
 
 The JSON contains:
 - `run_date` — date the scrape ran (YYYY-MM-DD)

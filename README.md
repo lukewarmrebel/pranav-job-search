@@ -39,7 +39,7 @@ Check the run logs. After it succeeds, verify `jobs_raw.json` is committed to th
 
 The URL Claude will WebFetch daily:
 ```
-https://raw.githubusercontent.com/YOUR_USERNAME/pranav-job-search/main/jobs_raw.json
+https://raw.githubusercontent.com/lukewarmrebel/pranav-job-search/main/jobs_raw.json
 ```
 
 ## Files
