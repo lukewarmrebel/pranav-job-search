@@ -1,0 +1,38 @@
+name: Daily Job Search
+
+on:
+  schedule:
+    # 8:00 AM IST = 2:30 AM UTC
+    - cron: '30 2 * * *'
+  workflow_dispatch:   # allow manual trigger from GitHub UI
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write   # needed to commit jobs_raw.json back to repo
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install -U python-jobspy pandas
+
+      - name: Run JobSpy scraper
+        run: python jobspy_run.py
+
+      - name: Commit & push results
+        run: |
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git add jobs_raw.json
+          # Only commit if the file actually changed
+          git diff --staged --quiet && echo "No new jobs, skipping commit" || \
+            git commit -m "chore: job search results $(date -u +%Y-%m-%d)" && git push
