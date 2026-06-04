@@ -275,8 +275,19 @@ except Exception:
 res     = tg_api("getUpdates", {"offset": last_offset, "limit": 100, "timeout": 0})
 updates = res.get("result", [])
 
+debug_lines = [
+    f"run_at={datetime.utcnow().isoformat()}",
+    f"offset_in={last_offset}",
+    f"updates_count={len(updates)}",
+    f"jobs_loaded={len(jobs_by_idx)}",
+    f"session_date={session_date}",
+]
+
 if not updates:
     print("No new updates.")
+    debug_lines.append("result=no_updates")
+    with open("data/bot_debug.txt", "w") as f:
+        f.write("\n".join(debug_lines) + "\n")
     sys.exit(0)
 
 state_changed = False
@@ -291,6 +302,7 @@ for update in updates:
         cq_id  = cq["id"]
         data   = cq.get("data", "")
         msg_id = cq.get("message", {}).get("message_id")
+        debug_lines.append(f"callback uid={uid} data={data!r}")
 
         if not data.startswith(("sl:", "sk:")):
             answer_callback(cq_id)
@@ -301,9 +313,11 @@ for update in updates:
             idx = int(idx_str)
         except ValueError:
             answer_callback(cq_id, "Invalid callback data.", alert=True)
+            debug_lines.append(f"  bad_idx={idx_str!r}")
             continue
 
         job = jobs_by_idx.get(idx)
+        debug_lines.append(f"  idx={idx} job_found={job is not None}")
         if not job:
             answer_callback(cq_id, "Session expired — check tomorrow's digest.", alert=True)
             continue
@@ -311,10 +325,12 @@ for update in updates:
         if action == "sl":
             sl = get_shortlist()
             already = any(j.get("idx") == idx for j in sl["jobs"])
+            debug_lines.append(f"  already_in_list={already}")
             if not already:
                 sl["jobs"].append(job)
                 save_json(SHORTLIST, sl)
                 state_changed = True
+                debug_lines.append(f"  saved_shortlist_count={len(sl['jobs'])}")
 
             answer_callback(cq_id, "✅ Added to shortlist!")
 
@@ -345,6 +361,7 @@ for update in updates:
         msg      = update["message"]
         text     = (msg.get("text") or "").strip()
         chat_id  = str(msg.get("chat", {}).get("id", ""))
+        debug_lines.append(f"message uid={uid} text={text[:40]!r} chat={chat_id}")
 
         if not text or chat_id != str(CHAT_ID):
             continue
@@ -391,9 +408,13 @@ for update in updates:
             msg_text += "\n\nSend /apply when ready for your Excel."
             send_text(msg_text)
 
-# ── save offset ───────────────────────────────────────────────────────────────
+# ── save offset & debug log ───────────────────────────────────────────────────
 
 Path(OFFSET_FILE).write_text(str(last_offset))
+debug_lines.append(f"offset_out={last_offset}")
+debug_lines.append(f"state_changed={state_changed}")
+with open("data/bot_debug.txt", "w") as f:
+    f.write("\n".join(debug_lines) + "\n")
 
 print(f"Processed {len(updates)} update(s). Offset: {last_offset}. Changed: {state_changed}")
 sys.exit(0)
