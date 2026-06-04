@@ -1,6 +1,8 @@
-run_at=2026-06-04T12:52:56.318844
+run_at=2026-06-04T15:41:48.603505
 offset_in=414870043
-updates_count=0
+updates_count=1
 jobs_loaded=59
 session_date=2026-06-04
-result=no_updates
+message uid=414870053 text='/apply' chat=334399855
+offset_out=414870054
+state_changed=False
