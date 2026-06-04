@@ -9,7 +9,7 @@ Commands:
   /help    — show usage
 """
 import json, os, sys, uuid, urllib.request, urllib.error
-from datetime import date, datetime
+from datetime import datetime
 from pathlib import Path
 
 try:
@@ -116,111 +116,15 @@ def save_json(path, data):
     with open(path, "w") as f:
         json.dump(data, f, indent=2)
 
-# ── scoring (mirrors telegram_notify.py) — used as fallback ──────────────────
 
-def _role_score(t):
-    t = t.lower()
-    for kw in ["principal product manager","senior product manager","lead product manager",
-                "staff product manager","product manager, senior"]:
-        if kw in t: return 40, "Product Manager"
-    if "product manager" in t:   return 40, "Product Manager"
-    if "product owner" in t:     return 37, "Product Owner"
-    for kw in ["senior business analyst","lead business analyst","technical business analyst"]:
-        if kw in t: return 35, "Business Analyst"
-    if "business analyst" in t:  return 35, "Business Analyst"
-    for kw in ["consultant, strategy","strategy, growth","transformation consultant",
-                "management consultant","digital transformation","strategy consultant"]:
-        if kw in t: return 33, "Consultant/Strategy"
-    if "consultant" in t:        return 33, "Consultant/Strategy"
-    for kw in ["program manager","delivery manager","project manager"]:
-        if kw in t: return 28, "Program Manager"
-    for kw in ["product specialist","product analyst","product associate","product operations"]:
-        if kw in t: return 28, "Product Manager"
-    return 0, None
-
-def _skills(d):
-    if not d: return 0
-    d = d.lower(); p = 0
-    if "roadmap" in d or "product strategy" in d: p += 5
-    if any(x in d for x in ["backlog","sprint","agile","scrum"]): p += 4
-    if any(x in d for x in ["requirements","acceptance criteria","uat"]): p += 4
-    if "stakeholder" in d: p += 4
-    if any(x in d for x in ["sql","power bi","kpi","analytics"]): p += 4
-    if any(x in d for x in ["generative ai","machine learning","llm","agentic","ai/ml","ai product","ai-powered"]): p += 5
-    if any(x in d for x in ["digital transformation","process improvement","automation"]): p += 4
-    return min(p, 30)
-
-def _domain(d):
-    if not d: return 0
-    d = d.lower(); p = 0
-    if any(x in d for x in ["insurance","motor claims","claims"]): p += 10
-    elif any(x in d for x in ["bfsi","fintech","financial services","banking","payments"]): p += 7
-    elif any(x in d for x in ["regtech","risk management","compliance"]): p += 4
-    if any(x in d for x in ["mba or relevant advanced degree is a must","mba or another advanced degree","mba preferred"]): p += 5
-    if any(x in d for x in ["ai product","generative ai","agentic","ai platform","ai strategy"]): p += 5
-    return min(p, 20)
-
-def _brand(c, d=""):
-    c = (c or "").lower(); d = (d or "").lower()
-    if any(x in c for x in ["amazon","google","microsoft","salesforce","jpmorgan","goldman","wells fargo","blackrock"]): return 10
-    if "hackajob" in c and "jp morgan" in d: return 10
-    if any(x in c for x in ["deloitte","pwc","hsbc","synchrony","nielsen","experian","optum","simcorp","natwest","state street","broadridge","wise"]): return 7
-    if any(x in c for x in ["wipro","infosys","tcs","genpact","capgemini","accenture","cognizant","publicis sapient","endava"]): return 4
-    return 0
-
-def _salary(j):
-    lo = j.get("min_amount"); hi = j.get("max_amount"); cur = j.get("currency") or ""
-    if lo and hi: return f"{cur}{int(lo):,}–{int(hi):,}"
-    if lo:        return f"{cur}{int(lo):,}+"
-    return ""
-
-def build_jobs_from_raw(raw_path="jobs_raw.json"):
-    try:
-        with open(raw_path) as f:
-            raw = json.load(f)
-    except Exception:
-        return str(date.today()), {}
-    run_date_str = raw.get("run_date", str(date.today()))
-    from datetime import timedelta
-    try:
-        run_date = date.fromisoformat(run_date_str)
-    except ValueError:
-        run_date = date.today()
-    cutoff = (run_date - timedelta(hours=48)).isoformat()
-    scored = []; seen = set()
-    for j in raw.get("jobs", []):
-        dp = j.get("date_posted"); title = j.get("title","") or ""; company = j.get("company","") or ""
-        desc = j.get("description","") or ""
-        if dp and dp < cutoff: continue
-        r1, rt = _role_score(title)
-        if r1 == 0: continue
-        key = (company.lower()[:20], title.lower()[:35])
-        if key in seen: continue
-        seen.add(key)
-        total = r1 + _skills(desc) + _domain(desc) + _brand(company, desc)
-        if total < 55: continue
-        scored.append({"score":total,"title":title,"company":company,"url":j.get("job_url","") or "",
-                        "date":dp or "Recent","role":rt or "","location":j.get("location","") or "",
-                        "salary":_salary(j),"site":j.get("site","") or ""})
-    scored.sort(key=lambda x: -x["score"])
-    for i, j in enumerate(scored): j["idx"] = i
-    return run_date_str, {j["idx"]: j for j in scored}
-
-
-# ── load jobs index — today_jobs.json first, fall back to jobs_raw.json ───────
+# ── load jobs index from today_jobs.json (written by Claude morning digest) ───
 
 today_data   = load_json(TODAY_JOBS, {})
 session_date = today_data.get("date", str(date.today()))
 jobs_by_idx  = {j["idx"]: j for j in today_data.get("jobs", [])}
 
 if not jobs_by_idx:
-    print("today_jobs.json empty or missing — rebuilding from jobs_raw.json")
-    session_date, jobs_by_idx = build_jobs_from_raw()
-    # Persist so future runs don't need to rebuild
-    if jobs_by_idx:
-        Path("data").mkdir(exist_ok=True)
-        with open(TODAY_JOBS, "w") as f:
-            json.dump({"date": session_date, "jobs": list(jobs_by_idx.values())}, f, indent=2)
+    print("today_jobs.json empty or missing — Claude morning digest not yet run today")
 
 
 def get_shortlist():
