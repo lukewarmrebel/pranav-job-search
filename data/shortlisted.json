@@ -1,4 +1,57 @@
 {
   "date": "2026-06-04",
-  "jobs": []
+  "jobs": [
+    {
+      "idx": 11,
+      "score": 68,
+      "title": "Product Manager",
+      "company": "Terralogic",
+      "url": "https://www.linkedin.com/jobs/view/4419682602",
+      "date": "2026-06-03",
+      "role": "Product Manager",
+      "location": "",
+      "salary": "",
+      "site": "linkedin",
+      "level": "mid-senior level"
+    },
+    {
+      "idx": 13,
+      "score": 67,
+      "title": "Data Product Manager III",
+      "company": "Swiss Re",
+      "url": "https://www.linkedin.com/jobs/view/4424243014",
+      "date": "Recent",
+      "role": "Product Manager",
+      "location": "Hyderabad, Telangana, India",
+      "salary": "",
+      "site": "linkedin",
+      "level": "not applicable"
+    },
+    {
+      "idx": 15,
+      "score": 67,
+      "title": "AVP, Product Owner - Digital Servicing (L11)",
+      "company": "Synchrony",
+      "url": "https://www.linkedin.com/jobs/view/4422950607",
+      "date": "Recent",
+      "role": "Product Owner",
+      "location": "Hyderabad, Telangana, India",
+      "salary": "",
+      "site": "linkedin",
+      "level": "mid-senior level"
+    },
+    {
+      "idx": 17,
+      "score": 66,
+      "title": "Business Analyst",
+      "company": "NewVision Software",
+      "url": "https://www.linkedin.com/jobs/view/4420702322",
+      "date": "Recent",
+      "role": "Business Analyst",
+      "location": "Hyderabad, Telangana, India",
+      "salary": "",
+      "site": "linkedin",
+      "level": "mid-senior level"
+    }
+  ]
 }
