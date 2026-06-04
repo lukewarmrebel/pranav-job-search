@@ -1,9 +1,8 @@
 """
-Daily job digest: sends full Excel + interactive job cards to Telegram.
-Called by GitHub Actions after jobspy_run.py.
+Sends full Excel + interactive job cards to Telegram.
+Reads from data/today_jobs.json (written by score_jobs.py).
 """
 import json, os, sys, uuid, urllib.request, urllib.error
-from datetime import date, timedelta
 from pathlib import Path
 
 try:
@@ -14,153 +13,27 @@ try:
 except ImportError:
     HAS_OPENPYXL = False
 
-TOKEN     = os.environ.get("TELEGRAM_TOKEN", "")
-CHAT_ID   = os.environ.get("TELEGRAM_CHAT_ID", "")
-JSON_PATH = os.environ.get("JOBS_JSON", "jobs_raw.json")
+TOKEN   = os.environ.get("TELEGRAM_TOKEN", "")
+CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID", "")
 
 if not TOKEN or not CHAT_ID:
-    print("WARNING: TELEGRAM_TOKEN or TELEGRAM_CHAT_ID not set — skipping.")
+    print("WARNING: no credentials — skipping.")
     sys.exit(0)
 
-
-# ── scoring ───────────────────────────────────────────────────────────────────
-
-def role_score(t):
-    t = t.lower()
-    for kw in ["principal product manager", "senior product manager",
-                "lead product manager", "staff product manager", "product manager, senior"]:
-        if kw in t: return 40, "Product Manager"
-    if "product manager" in t:   return 40, "Product Manager"
-    if "product owner" in t:     return 37, "Product Owner"
-    for kw in ["senior business analyst", "lead business analyst", "technical business analyst"]:
-        if kw in t: return 35, "Business Analyst"
-    if "business analyst" in t:  return 35, "Business Analyst"
-    for kw in ["consultant, strategy", "strategy, growth", "transformation consultant",
-                "management consultant", "digital transformation", "strategy consultant"]:
-        if kw in t: return 33, "Consultant/Strategy"
-    if "consultant" in t:        return 33, "Consultant/Strategy"
-    for kw in ["program manager", "delivery manager", "project manager"]:
-        if kw in t: return 28, "Program Manager"
-    for kw in ["product specialist", "product analyst", "product associate", "product operations"]:
-        if kw in t: return 28, "Product Manager"
-    return 0, None
-
-def skills_pts(d):
-    if not d: return 0
-    d = d.lower(); p = 0
-    if "roadmap" in d or "product strategy" in d:          p += 5
-    if any(x in d for x in ["backlog", "sprint", "agile", "scrum"]): p += 4
-    if any(x in d for x in ["requirements", "acceptance criteria", "uat"]): p += 4
-    if "stakeholder" in d:                                  p += 4
-    if any(x in d for x in ["sql", "power bi", "kpi", "analytics"]): p += 4
-    if any(x in d for x in ["generative ai", "machine learning", "llm",
-                              "agentic", "ai/ml", "ai product", "ai-powered"]): p += 5
-    if any(x in d for x in ["digital transformation", "process improvement", "automation"]): p += 4
-    return min(p, 30)
-
-def domain_pts(d):
-    if not d: return 0
-    d = d.lower(); p = 0
-    if any(x in d for x in ["insurance", "motor claims", "claims"]):     p += 10
-    elif any(x in d for x in ["bfsi", "fintech", "financial services", "banking", "payments"]): p += 7
-    elif any(x in d for x in ["regtech", "risk management", "compliance"]): p += 4
-    if any(x in d for x in ["mba or relevant advanced degree is a must",
-                              "mba or another advanced degree", "mba preferred"]): p += 5
-    if any(x in d for x in ["ai product", "generative ai", "agentic", "ai platform", "ai strategy"]): p += 5
-    return min(p, 20)
-
-def brand_pts(c, d=""):
-    c = (c or "").lower(); d = (d or "").lower()
-    if any(x in c for x in ["amazon", "google", "microsoft", "salesforce", "jpmorgan",
-                              "goldman", "wells fargo", "blackrock"]): return 10
-    if "hackajob" in c and "jp morgan" in d: return 10
-    if any(x in c for x in ["deloitte", "pwc", "hsbc", "synchrony", "nielsen", "experian",
-                              "optum", "simcorp", "natwest", "state street", "broadridge", "wise"]): return 7
-    if any(x in c for x in ["wipro", "infosys", "tcs", "genpact", "capgemini", "accenture",
-                              "cognizant", "publicis sapient", "endava"]): return 4
-    return 0
-
-def salary_str(j):
-    lo = j.get("min_amount"); hi = j.get("max_amount"); cur = j.get("currency") or ""
-    if lo and hi:  return f"{cur}{int(lo):,}–{int(hi):,}"
-    if lo:         return f"{cur}{int(lo):,}+"
-    return ""
-
-
-# ── load & score ──────────────────────────────────────────────────────────────
-
+# Load scored jobs (written by score_jobs.py before this runs)
 try:
-    with open(JSON_PATH) as f:
-        raw = json.load(f)
+    with open("data/today_jobs.json") as f:
+        today_data = json.load(f)
 except Exception as e:
-    print(f"ERROR reading {JSON_PATH}: {e}")
+    print(f"ERROR reading data/today_jobs.json: {e}")
     sys.exit(0)
 
-run_date_str = raw.get("run_date", str(date.today()))
-try:
-    run_date = date.fromisoformat(run_date_str)
-except ValueError:
-    run_date = date.today()
-cutoff = (run_date - timedelta(hours=48)).isoformat()
+scored       = today_data.get("jobs", [])
+run_date_str = today_data.get("date", "today")
 
-scored = []
-seen   = set()
-
-for j in raw.get("jobs", []):
-    dp      = j.get("date_posted")
-    title   = j.get("title", "") or ""
-    company = j.get("company", "") or ""
-    desc    = j.get("description", "") or ""
-    if dp and dp < cutoff:
-        continue
-    r1, rt = role_score(title)
-    if r1 == 0:
-        continue
-    key = (company.lower()[:20], title.lower()[:35])
-    if key in seen:
-        continue
-    seen.add(key)
-    total = r1 + skills_pts(desc) + domain_pts(desc) + brand_pts(company, desc)
-    if total < 55:
-        continue
-    scored.append({
-        "idx":      len(scored),
-        "score":    total,
-        "title":    title,
-        "company":  company,
-        "url":      j.get("job_url", "") or "",
-        "date":     dp or "Recent",
-        "role":     rt or "",
-        "location": j.get("location", "") or "",
-        "salary":   salary_str(j),
-        "site":     j.get("site", "") or "",
-        "level":    j.get("job_level", "") or "",
-    })
-
-scored.sort(key=lambda x: -x["score"])
-for i, j in enumerate(scored):
-    j["idx"] = i
-
-
-# ── save state files ──────────────────────────────────────────────────────────
-
-Path("data").mkdir(exist_ok=True)
-
-with open("data/today_jobs.json", "w") as f:
-    json.dump({"date": run_date_str, "jobs": scored}, f, indent=2)
-
-for path, template in [
-    ("data/shortlisted.json", {"date": run_date_str, "jobs": []}),
-    ("data/manual_jobs.json", {"date": run_date_str, "entries": []}),
-]:
-    p = Path(path)
-    existing = {}
-    if p.exists():
-        try: existing = json.loads(p.read_text())
-        except: pass
-    if existing.get("date") != run_date_str:
-        with open(path, "w") as f:
-            json.dump(template, f, indent=2)
+if not scored:
+    print("No scored jobs found — skipping.")
+    sys.exit(0)
 
 
 # ── Excel generation ──────────────────────────────────────────────────────────
@@ -180,9 +53,9 @@ def make_full_excel(jobs, date_str):
     BD         = Side(style="thin", color="CCCCCC")
     BORDER     = Border(left=BD, right=BD, top=BD, bottom=BD)
 
-    cols = ["#", "Score", "Role", "Title", "Company", "Location", "Date", "Salary", "Site", "Apply URL"]
+    cols = ["#","Score","Role","Title","Company","Location","Date","Salary","Site","Apply URL"]
     ws.append(cols)
-    for col in range(1, len(cols) + 1):
+    for col in range(1, len(cols)+1):
         c = ws.cell(1, col)
         c.fill = HDR_FILL; c.font = HDR_FONT
         c.alignment = Alignment(horizontal="center", wrap_text=True)
@@ -190,15 +63,15 @@ def make_full_excel(jobs, date_str):
 
     for rank, j in enumerate(jobs, 1):
         sc = j["score"]
-        row = [rank, sc, j["role"], j["title"], j["company"],
-               j["location"], j["date"], j["salary"], j["site"], j["url"]]
+        row = [rank, sc, j.get("role",""), j["title"], j["company"],
+               j.get("location",""), j.get("date",""), j.get("salary",""), j.get("site",""), j.get("url","")]
         ws.append(row)
         fill = GREEN_FILL if sc >= 75 else (YELLOW_FILL if sc >= 60 else RED_FILL)
-        for col in range(1, len(row) + 1):
+        for col in range(1, len(row)+1):
             c = ws.cell(ws.max_row, col)
             c.fill = fill; c.border = BORDER
             c.alignment = Alignment(wrap_text=True, vertical="top")
-        if j["url"]:
+        if j.get("url"):
             c = ws.cell(ws.max_row, 10)
             c.hyperlink = j["url"]
             c.font = Font(color="0563C1", underline="single")
@@ -209,16 +82,14 @@ def make_full_excel(jobs, date_str):
     ws.freeze_panes = "A2"
     ws.auto_filter.ref = f"A1:{get_column_letter(len(cols))}1"
 
-    # Legend
     ws2 = wb.create_sheet("Legend")
-    for row, (color, meaning) in enumerate([
-        ("E2EFDA", "High match (score ≥ 75)"),
-        ("FFEB9C", "Medium match (score 60–74)"),
-        ("FFC7CE", "Lower match (score 55–59)"),
-    ], start=1):
-        ws2.cell(row, 1).fill = PatternFill("solid", fgColor=color)
-        ws2.cell(row, 1).value = f"Score {'≥75' if row==1 else ('60–74' if row==2 else '55–59')}"
-        ws2.cell(row, 2).value = meaning
+    for row, (color, label) in enumerate([
+        ("E2EFDA","Score ≥75 — High match"),
+        ("FFEB9C","Score 60–74 — Medium match"),
+        ("FFC7CE","Score 55–59 — Lower match"),
+    ], 1):
+        ws2.cell(row,1).fill = PatternFill("solid", fgColor=color)
+        ws2.cell(row,2).value = label
 
     path = f"/tmp/jobs_full_{date_str}.xlsx"
     wb.save(path)
@@ -288,13 +159,8 @@ else:
 
 # ── send interactive job cards (top 20) ──────────────────────────────────────
 
-ROLE_EMOJI = {
-    "Product Manager":     "🧩",
-    "Product Owner":       "📋",
-    "Business Analyst":    "📊",
-    "Consultant/Strategy": "💼",
-    "Program Manager":     "🗂",
-}
+ROLE_EMOJI = {"Product Manager":"🧩","Product Owner":"📋",
+              "Business Analyst":"📊","Consultant/Strategy":"💼","Program Manager":"🗂"}
 
 def score_dot(s):
     return "🟢" if s >= 75 else ("🟡" if s >= 60 else "🔴")
@@ -310,25 +176,23 @@ sent_msgs = {}
 for job in top:
     idx   = job["idx"]
     sc    = job["score"]
-    emoji = ROLE_EMOJI.get(job["role"], "🔹")
+    emoji = ROLE_EMOJI.get(job.get("role",""), "🔹")
 
     text = (
         f"{score_dot(sc)} <b>#{idx+1} · {sc}/100</b> {emoji} <b>{job['title']}</b>\n"
         f"🏢 {job['company']}"
     )
-    if job["location"]:
+    if job.get("location"):
         text += f" · 📍 {job['location']}"
-    text += f" · 📅 {job['date']}"
-    if job["salary"]:
+    text += f" · 📅 {job.get('date','')}"
+    if job.get("salary"):
         text += f" · 💰 {job['salary']}"
-    if job["url"]:
+    if job.get("url"):
         text += f'\n<a href="{job["url"]}">View →</a>'
 
     r = tg_api("sendMessage", {
-        "chat_id":    CHAT_ID,
-        "text":       text,
-        "parse_mode": "HTML",
-        "disable_web_page_preview": True,
+        "chat_id": CHAT_ID, "text": text,
+        "parse_mode": "HTML", "disable_web_page_preview": True,
         "reply_markup": {"inline_keyboard": [[
             {"text": "✅ Shortlist", "callback_data": f"sl:{idx}"},
             {"text": "❌ Skip",      "callback_data": f"sk:{idx}"},
@@ -346,6 +210,7 @@ send_text(
     "• /status — see your shortlist count"
 )
 
+Path("data").mkdir(exist_ok=True)
 with open("data/sent_messages.json", "w") as f:
     json.dump({"date": run_date_str, "messages": sent_msgs}, f, indent=2)
 
