@@ -2,7 +2,6 @@
   "date": "2026-06-04",
   "jobs": [
     {
-      "idx": 0,
       "score": 88,
       "title": "Product Manager, ECS Generative AI Experiences",
       "company": "Experian",
@@ -12,36 +11,21 @@
       "location": "Hyderabad, Telangana, India",
       "salary": "",
       "site": "linkedin",
-      "level": "not applicable"
+      "idx": 0
     },
     {
-      "idx": 1,
-      "score": 85,
-      "title": "Lead Product Manager, Insights",
-      "company": "ABC Fitness India Pvt Ltd",
-      "url": "https://in.indeed.com/viewjob?jk=cf88f768af1b8507",
+      "score": 78,
+      "title": "Product Manager - Data Publishing and Processing",
+      "company": "JPMorganChase",
+      "url": "https://in.indeed.com/viewjob?jk=abb350ef20014708",
       "date": "2026-06-04",
       "role": "Product Manager",
       "location": "TS, IN",
       "salary": "",
       "site": "indeed",
-      "level": ""
+      "idx": 1
     },
     {
-      "idx": 2,
-      "score": 78,
-      "title": "Principal Product Owner, AI Platform",
-      "company": "SimCorp",
-      "url": "https://www.linkedin.com/jobs/view/4422417751",
-      "date": "2026-06-02",
-      "role": "Product Owner",
-      "location": "Hyderabad, Telangana, India",
-      "salary": "",
-      "site": "linkedin",
-      "level": "mid-senior level"
-    },
-    {
-      "idx": 3,
       "score": 75,
       "title": "Product Manager, Payment Platform",
       "company": "Google",
@@ -51,10 +35,9 @@
       "location": "Hyderabad, Telangana, India",
       "salary": "",
       "site": "linkedin",
-      "level": "not applicable"
+      "idx": 2
     },
     {
-      "idx": 4,
       "score": 74,
       "title": "Senior Product Manager (Integrations)",
       "company": "Eltropy",
@@ -64,36 +47,21 @@
       "location": "Hyderabad, Telangana, India",
       "salary": "",
       "site": "linkedin",
-      "level": "mid-senior level"
+      "idx": 3
     },
     {
-      "idx": 5,
       "score": 74,
       "title": "Senior Product Manager",
       "company": "Bottomline",
       "url": "https://www.linkedin.com/jobs/view/4422989346",
-      "date": "Recent",
+      "date": "2026-06-03",
       "role": "Product Manager",
       "location": "",
       "salary": "",
       "site": "linkedin",
-      "level": "mid-senior level"
+      "idx": 4
     },
     {
-      "idx": 6,
-      "score": 73,
-      "title": "Technical Business Analyst, Officer",
-      "company": "State Street",
-      "url": "https://www.linkedin.com/jobs/view/4416649661",
-      "date": "2026-06-02",
-      "role": "Business Analyst",
-      "location": "Hyderabad, Telangana, India",
-      "salary": "",
-      "site": "linkedin",
-      "level": "not applicable"
-    },
-    {
-      "idx": 7,
       "score": 72,
       "title": "Lead Product Owner",
       "company": "SoTalent",
@@ -103,49 +71,33 @@
       "location": "Bangalore Urban, Karnataka, India",
       "salary": "",
       "site": "linkedin",
-      "level": "mid-senior level"
+      "idx": 5
     },
     {
-      "idx": 8,
-      "score": 69,
-      "title": "Capability Product Manager",
-      "company": "Optum India",
-      "url": "https://www.linkedin.com/jobs/view/4423351543",
+      "score": 71,
+      "title": "Technical Product Manager - AI Chatbot for ERP Data",
+      "company": "Amotion AI",
+      "url": "https://www.linkedin.com/jobs/view/4424399562",
       "date": "Recent",
       "role": "Product Manager",
       "location": "Hyderabad, Telangana, India",
       "salary": "",
       "site": "linkedin",
-      "level": "mid-senior level"
+      "idx": 6
     },
     {
-      "idx": 9,
-      "score": 68,
-      "title": "Senior Business Analyst \u2013 Wealth Management / Capital Markets",
-      "company": "CGI",
-      "url": "https://in.indeed.com/viewjob?jk=ec4f9c570e4362a4",
+      "score": 71,
+      "title": "IND - Sr Business Analyst",
+      "company": "The Hartford India",
+      "url": "https://www.linkedin.com/jobs/view/4413598080",
       "date": "2026-06-03",
       "role": "Business Analyst",
-      "location": "TS, IN",
-      "salary": "",
-      "site": "indeed",
-      "level": ""
-    },
-    {
-      "idx": 10,
-      "score": 68,
-      "title": "Senior Technical Product Manager",
-      "company": "Optum India",
-      "url": "https://www.linkedin.com/jobs/view/4423347645",
-      "date": "Recent",
-      "role": "Product Manager",
-      "location": "Hyderabad, Telangana, India",
+      "location": "",
       "salary": "",
       "site": "linkedin",
-      "level": "mid-senior level"
+      "idx": 7
     },
     {
-      "idx": 11,
       "score": 68,
       "title": "Product Manager",
       "company": "Terralogic",
@@ -155,10 +107,21 @@
       "location": "",
       "salary": "",
       "site": "linkedin",
-      "level": "mid-senior level"
+      "idx": 8
     },
     {
-      "idx": 12,
+      "score": 68,
+      "title": "Product Manager - Vice President",
+      "company": "hackajob",
+      "url": "https://www.linkedin.com/jobs/view/4413570964",
+      "date": "2026-06-03",
+      "role": "Product Manager",
+      "location": "Bengaluru, Karnataka, India",
+      "salary": "",
+      "site": "linkedin",
+      "idx": 9
+    },
+    {
       "score": 68,
       "title": "AI Product Owner",
       "company": "hackajob",
@@ -168,49 +131,57 @@
       "location": "Bengaluru, Karnataka, India",
       "salary": "",
       "site": "linkedin",
-      "level": "entry level"
+      "idx": 10
     },
     {
-      "idx": 13,
-      "score": 67,
-      "title": "Data Product Manager III",
-      "company": "Swiss Re",
-      "url": "https://www.linkedin.com/jobs/view/4424243014",
+      "score": 68,
+      "title": "Business Analyst",
+      "company": "NEW STREET TECH",
+      "url": "https://www.linkedin.com/jobs/view/4423921490",
       "date": "Recent",
+      "role": "Business Analyst",
+      "location": "Bengaluru, Karnataka, India",
+      "salary": "",
+      "site": "linkedin",
+      "idx": 11
+    },
+    {
+      "score": 67,
+      "title": "Principal Product Manager (Location Verification)",
+      "company": "Wise",
+      "url": "https://www.linkedin.com/jobs/view/4372341223",
+      "date": "2026-06-03",
       "role": "Product Manager",
       "location": "Hyderabad, Telangana, India",
       "salary": "",
       "site": "linkedin",
-      "level": "not applicable"
+      "idx": 12
     },
     {
-      "idx": 14,
       "score": 67,
-      "title": "Product Owner/ Business Analyst \u2013 Tax Reporting",
-      "company": "Broadridge India",
-      "url": "https://www.linkedin.com/jobs/view/4413085765",
-      "date": "2026-06-02",
-      "role": "Product Owner",
-      "location": "Hyderabad, Telangana, India",
+      "title": "Product Manager test",
+      "company": "Theos",
+      "url": "https://www.linkedin.com/jobs/view/4420718417",
+      "date": "Recent",
+      "role": "Product Manager",
+      "location": "Patancheru, Telangana, India",
       "salary": "",
       "site": "linkedin",
-      "level": "not applicable"
+      "idx": 13
     },
     {
-      "idx": 15,
       "score": 67,
       "title": "AVP, Product Owner - Digital Servicing (L11)",
       "company": "Synchrony",
       "url": "https://www.linkedin.com/jobs/view/4422950607",
-      "date": "Recent",
+      "date": "2026-06-03",
       "role": "Product Owner",
       "location": "Hyderabad, Telangana, India",
       "salary": "",
       "site": "linkedin",
-      "level": "mid-senior level"
+      "idx": 14
     },
     {
-      "idx": 16,
       "score": 67,
       "title": "Product Manager",
       "company": "Cognizant",
@@ -220,10 +191,21 @@
       "location": "Bangalore Urban, Karnataka, India",
       "salary": "",
       "site": "linkedin",
-      "level": "mid-senior level"
+      "idx": 15
     },
     {
-      "idx": 17,
+      "score": 66,
+      "title": "Lead Product Manager",
+      "company": "Providence India",
+      "url": "https://www.linkedin.com/jobs/view/4403213032",
+      "date": "Recent",
+      "role": "Product Manager",
+      "location": "Hyderabad, Telangana, India",
+      "salary": "",
+      "site": "linkedin",
+      "idx": 16
+    },
+    {
       "score": 66,
       "title": "Business Analyst",
       "company": "NewVision Software",
@@ -233,10 +215,9 @@
       "location": "Hyderabad, Telangana, India",
       "salary": "",
       "site": "linkedin",
-      "level": "mid-senior level"
+      "idx": 17
     },
     {
-      "idx": 18,
       "score": 66,
       "title": "Product Manager - Supply Chain",
       "company": "Licious",
@@ -246,10 +227,21 @@
       "location": "Bengaluru, Karnataka, India",
       "salary": "",
       "site": "linkedin",
-      "level": "mid-senior level"
+      "idx": 18
     },
     {
-      "idx": 19,
+      "score": 66,
+      "title": "Guidewire BA-Consultant, Functional Transformation",
+      "company": "Deloitte",
+      "url": "https://in.indeed.com/viewjob?jk=2f8b661fb7698057",
+      "date": "2026-06-04",
+      "role": "Consultant/Strategy",
+      "location": "KA, IN",
+      "salary": "",
+      "site": "indeed",
+      "idx": 19
+    },
+    {
       "score": 65,
       "title": "Senior Product Manager",
       "company": "Publicis Sapient",
@@ -259,23 +251,9 @@
       "location": "Hyderabad, Telangana, India",
       "salary": "",
       "site": "linkedin",
-      "level": "mid-senior level"
+      "idx": 20
     },
     {
-      "idx": 20,
-      "score": 65,
-      "title": "Sr Product Manager",
-      "company": "Five9",
-      "url": "https://in.indeed.com/viewjob?jk=f0b1291079da9c06",
-      "date": "2026-06-04",
-      "role": "Product Manager",
-      "location": "KA, IN",
-      "salary": "",
-      "site": "indeed",
-      "level": ""
-    },
-    {
-      "idx": 21,
       "score": 65,
       "title": "Product Manager",
       "company": "greytHR",
@@ -285,49 +263,21 @@
       "location": "Bengaluru, Karnataka, India",
       "salary": "",
       "site": "linkedin",
-      "level": "associate"
+      "idx": 21
     },
     {
-      "idx": 22,
-      "score": 65,
-      "title": "Product Owner, VP",
-      "company": "NatWest Group",
-      "url": "https://www.linkedin.com/jobs/view/4422425907",
-      "date": "2026-06-02",
-      "role": "Product Owner",
-      "location": "Bengaluru, Karnataka, India",
-      "salary": "",
-      "site": "linkedin",
-      "level": "executive"
-    },
-    {
-      "idx": 23,
-      "score": 65,
-      "title": "Business Analyst - Data and Analytics",
-      "company": "HSBC",
-      "url": "https://www.linkedin.com/jobs/view/4422381594",
-      "date": "2026-06-02",
-      "role": "Business Analyst",
-      "location": "Bengaluru, Karnataka, India",
-      "salary": "",
-      "site": "linkedin",
-      "level": "mid-senior level"
-    },
-    {
-      "idx": 24,
       "score": 64,
-      "title": "Tech Product Manager",
-      "company": "Optum India",
-      "url": "https://www.linkedin.com/jobs/view/4423344794",
+      "title": "Product Owner",
+      "company": "Accurate Background",
+      "url": "https://www.linkedin.com/jobs/view/4414575392",
       "date": "Recent",
-      "role": "Product Manager",
+      "role": "Product Owner",
       "location": "Hyderabad, Telangana, India",
       "salary": "",
       "site": "linkedin",
-      "level": "mid-senior level"
+      "idx": 22
     },
     {
-      "idx": 25,
       "score": 64,
       "title": "Product Manager",
       "company": "AAA Global",
@@ -337,10 +287,33 @@
       "location": "Bengaluru, Karnataka, India",
       "salary": "",
       "site": "linkedin",
-      "level": "mid-senior level"
+      "idx": 23
     },
     {
-      "idx": 26,
+      "score": 64,
+      "title": "Product Manager",
+      "company": "Tesco Bengaluru",
+      "url": "https://www.linkedin.com/jobs/view/4424079388",
+      "date": "2026-06-03",
+      "role": "Product Manager",
+      "location": "Bengaluru, Karnataka, India",
+      "salary": "",
+      "site": "linkedin",
+      "idx": 24
+    },
+    {
+      "score": 64,
+      "title": "Product Manager",
+      "company": "Tesco Technology",
+      "url": "https://www.linkedin.com/jobs/view/4424091125",
+      "date": "2026-06-03",
+      "role": "Product Manager",
+      "location": "Bengaluru, Karnataka, India",
+      "salary": "",
+      "site": "linkedin",
+      "idx": 25
+    },
+    {
       "score": 63,
       "title": "FBS Product Owner II",
       "company": "Capgemini",
@@ -350,49 +323,21 @@
       "location": "Hyderabad, Telangana, India",
       "salary": "",
       "site": "linkedin",
-      "level": "mid-senior level"
+      "idx": 26
     },
     {
-      "idx": 27,
       "score": 62,
-      "title": "Principal Product Manager - Financial Product",
-      "company": "Blackbaud India",
-      "url": "https://www.linkedin.com/jobs/view/4424095818",
+      "title": "Product Owner",
+      "company": "Precision AQ",
+      "url": "https://www.linkedin.com/jobs/view/4404437260",
       "date": "Recent",
-      "role": "Product Manager",
-      "location": "Hyderabad, Telangana, India",
-      "salary": "",
-      "site": "linkedin",
-      "level": "mid-senior level"
-    },
-    {
-      "idx": 28,
-      "score": 62,
-      "title": "Senior Principal Product Manager - Supply Chain Analytics",
-      "company": "Dr. Reddy's Laboratories",
-      "url": "https://www.linkedin.com/jobs/view/4414550678",
-      "date": "Recent",
-      "role": "Product Manager",
-      "location": "Hyderabad, Telangana, India",
-      "salary": "",
-      "site": "linkedin",
-      "level": "mid-senior level"
-    },
-    {
-      "idx": 29,
-      "score": 62,
-      "title": "Product Owner HRSD ServiceNow",
-      "company": "UL Solutions",
-      "url": "https://www.linkedin.com/jobs/view/4401934824",
-      "date": "2026-06-02",
       "role": "Product Owner",
       "location": "Bengaluru, Karnataka, India",
       "salary": "",
       "site": "linkedin",
-      "level": "mid-senior level"
+      "idx": 27
     },
     {
-      "idx": 30,
       "score": 62,
       "title": "Product Analyst - AIML Platform",
       "company": "Visa",
@@ -402,10 +347,21 @@
       "location": "KA, IN",
       "salary": "",
       "site": "indeed",
-      "level": ""
+      "idx": 28
     },
     {
-      "idx": 31,
+      "score": 61,
+      "title": "Business Analyst",
+      "company": "acuvate",
+      "url": "https://in.indeed.com/viewjob?jk=3351e7b9dfcc5ec7",
+      "date": "2026-06-04",
+      "role": "Business Analyst",
+      "location": "TS, IN",
+      "salary": "",
+      "site": "indeed",
+      "idx": 29
+    },
+    {
       "score": 61,
       "title": "Business Analyst",
       "company": "Cloud Peritus",
@@ -415,10 +371,9 @@
       "location": "Hyderabad, Telangana, India",
       "salary": "",
       "site": "linkedin",
-      "level": "mid-senior level"
+      "idx": 30
     },
     {
-      "idx": 32,
       "score": 61,
       "title": "Business Analyst",
       "company": "HCLTech",
@@ -428,23 +383,9 @@
       "location": "Hyderabad, Telangana, India",
       "salary": "",
       "site": "linkedin",
-      "level": "mid-senior level"
+      "idx": 31
     },
     {
-      "idx": 33,
-      "score": 61,
-      "title": "Software Engineer - Sr. Consultant level-4",
-      "company": "Visa",
-      "url": "https://in.indeed.com/viewjob?jk=c83b2b0e55d9c018",
-      "date": "2026-06-04",
-      "role": "Consultant/Strategy",
-      "location": "KA, IN",
-      "salary": "",
-      "site": "indeed",
-      "level": ""
-    },
-    {
-      "idx": 34,
       "score": 61,
       "title": "Senior Product Manager",
       "company": "Precisely",
@@ -454,10 +395,9 @@
       "location": "Bengaluru, Karnataka, India",
       "salary": "",
       "site": "linkedin",
-      "level": "mid-senior level"
+      "idx": 32
     },
     {
-      "idx": 35,
       "score": 61,
       "title": "Product Manager",
       "company": "Ema",
@@ -467,23 +407,9 @@
       "location": "Bengaluru, Karnataka, India",
       "salary": "",
       "site": "linkedin",
-      "level": "mid-senior level"
+      "idx": 33
     },
     {
-      "idx": 36,
-      "score": 60,
-      "title": "Product Manager (Order-to-cash, Fintech)",
-      "company": "CG-VAK Software & Exports Ltd.",
-      "url": "https://www.linkedin.com/jobs/view/4424218551",
-      "date": "Recent",
-      "role": "Product Manager",
-      "location": "Bengaluru, Karnataka, India",
-      "salary": "",
-      "site": "linkedin",
-      "level": "mid-senior level"
-    },
-    {
-      "idx": 37,
       "score": 59,
       "title": "Senior Product Specialist",
       "company": "SAP",
@@ -493,10 +419,21 @@
       "location": "Hyderabad, Telangana, India",
       "salary": "",
       "site": "linkedin",
-      "level": "not applicable"
+      "idx": 34
     },
     {
-      "idx": 38,
+      "score": 59,
+      "title": "Product Manager - Fintech",
+      "company": "Merge Money Ltd.",
+      "url": "https://in.indeed.com/viewjob?jk=9ce20816b62b9dec",
+      "date": "2026-06-04",
+      "role": "Product Manager",
+      "location": "KA, IN",
+      "salary": "",
+      "site": "indeed",
+      "idx": 35
+    },
+    {
       "score": 59,
       "title": "Product Owner",
       "company": "myGwork - LGBTQ+ Business Community",
@@ -506,36 +443,9 @@
       "location": "Bengaluru, Karnataka, India",
       "salary": "",
       "site": "linkedin",
-      "level": "entry level"
+      "idx": 36
     },
     {
-      "idx": 39,
-      "score": 58,
-      "title": "Staff Product Owner",
-      "company": "The TJX Companies, Inc.",
-      "url": "https://in.indeed.com/viewjob?jk=64c701371a9fd601",
-      "date": "2026-06-04",
-      "role": "Product Owner",
-      "location": "TS, IN",
-      "salary": "",
-      "site": "indeed",
-      "level": ""
-    },
-    {
-      "idx": 40,
-      "score": 58,
-      "title": "Dev Project Manager",
-      "company": "Infor",
-      "url": "https://in.indeed.com/viewjob?jk=60ab4e9217769560",
-      "date": "2026-06-04",
-      "role": "Program Manager",
-      "location": "TS, IN",
-      "salary": "",
-      "site": "indeed",
-      "level": ""
-    },
-    {
-      "idx": 41,
       "score": 58,
       "title": "Staff Product Owner",
       "company": "TJX India",
@@ -545,49 +455,57 @@
       "location": "",
       "salary": "",
       "site": "linkedin",
-      "level": "mid-senior level"
+      "idx": 37
     },
     {
-      "idx": 42,
       "score": 58,
       "title": "Business Analyst- Senior Analyst- Hyderabad",
       "company": "Deloitte",
       "url": "https://www.linkedin.com/jobs/view/4424227083",
+      "date": "2026-06-03",
+      "role": "Business Analyst",
+      "location": "Hyderabad, Telangana, India",
+      "salary": "",
+      "site": "linkedin",
+      "idx": 38
+    },
+    {
+      "score": 58,
+      "title": "Senior Business Analyst",
+      "company": "WebileApps (India) Pvt. Ltd. (A KFin Technologies company)",
+      "url": "https://www.linkedin.com/jobs/view/4422937618",
+      "date": "2026-06-03",
+      "role": "Business Analyst",
+      "location": "Hyderabad, Telangana, India",
+      "salary": "",
+      "site": "linkedin",
+      "idx": 39
+    },
+    {
+      "score": 58,
+      "title": "Business Analyst I, AOP",
+      "company": "Amazon",
+      "url": "https://www.linkedin.com/jobs/view/4373536939",
+      "date": "2026-06-03",
+      "role": "Business Analyst",
+      "location": "Hyderabad, Telangana, India",
+      "salary": "",
+      "site": "linkedin",
+      "idx": 40
+    },
+    {
+      "score": 58,
+      "title": "Business Analyst (Production Support & Project Delivery)",
+      "company": "TrueID",
+      "url": "https://www.linkedin.com/jobs/view/4420199724",
       "date": "Recent",
       "role": "Business Analyst",
       "location": "Hyderabad, Telangana, India",
       "salary": "",
       "site": "linkedin",
-      "level": "not applicable"
+      "idx": 41
     },
     {
-      "idx": 43,
-      "score": 58,
-      "title": "Senior Product Operations Manager",
-      "company": "Acceldata",
-      "url": "https://www.linkedin.com/jobs/view/4333714866",
-      "date": "2026-06-02",
-      "role": "Product Manager",
-      "location": "Bengaluru, Karnataka, India",
-      "salary": "",
-      "site": "linkedin",
-      "level": "mid-senior level"
-    },
-    {
-      "idx": 44,
-      "score": 58,
-      "title": "Product Manager (Advertising)",
-      "company": "Adobe",
-      "url": "https://www.linkedin.com/jobs/view/4391812325",
-      "date": "2026-06-02",
-      "role": "Product Manager",
-      "location": "Bengaluru East, Karnataka, India",
-      "salary": "",
-      "site": "linkedin",
-      "level": "mid-senior level"
-    },
-    {
-      "idx": 45,
       "score": 58,
       "title": "Product Owner - Swagger",
       "company": "SmartBear",
@@ -597,36 +515,21 @@
       "location": "Bengaluru, Karnataka, India",
       "salary": "",
       "site": "linkedin",
-      "level": "mid-senior level"
+      "idx": 42
     },
     {
-      "idx": 46,
       "score": 58,
       "title": "Product Owner",
-      "company": "Kenvue",
-      "url": "https://www.linkedin.com/jobs/view/4423937023",
-      "date": "2026-06-02",
+      "company": "SoTalent",
+      "url": "https://www.linkedin.com/jobs/view/4420738470",
+      "date": "Recent",
       "role": "Product Owner",
       "location": "Bengaluru, Karnataka, India",
       "salary": "",
       "site": "linkedin",
-      "level": "mid-senior level"
+      "idx": 43
     },
     {
-      "idx": 47,
-      "score": 58,
-      "title": "Senior Technical Product Owner",
-      "company": "Conga",
-      "url": "https://www.linkedin.com/jobs/view/4413554877",
-      "date": "2026-06-02",
-      "role": "Product Owner",
-      "location": "Bengaluru, Karnataka, India",
-      "salary": "",
-      "site": "linkedin",
-      "level": "mid-senior level"
-    },
-    {
-      "idx": 48,
       "score": 58,
       "title": "Business Analyst- SharePoint",
       "company": "Thakral One",
@@ -636,62 +539,33 @@
       "location": "KA, IN",
       "salary": "",
       "site": "indeed",
-      "level": ""
+      "idx": 44
     },
     {
-      "idx": 49,
       "score": 58,
-      "title": "Business analyst - Regulatory reporting",
-      "company": "Infosys",
-      "url": "https://www.linkedin.com/jobs/view/4403648587",
-      "date": "2026-06-02",
-      "role": "Business Analyst",
-      "location": "Bengaluru East, Karnataka, India",
-      "salary": "",
-      "site": "linkedin",
-      "level": "mid-senior level"
-    },
-    {
-      "idx": 50,
-      "score": 57,
-      "title": "Product Manager, Senior - Data &\u00a0Analytics",
-      "company": "Blackbaud India",
-      "url": "https://www.linkedin.com/jobs/view/4424204421",
+      "title": "Business Analyst",
+      "company": "InfoSpeed Services, Inc.",
+      "url": "https://www.linkedin.com/jobs/view/4424325264",
       "date": "Recent",
-      "role": "Product Manager",
-      "location": "Hyderabad, Telangana, India",
+      "role": "Business Analyst",
+      "location": "Bengaluru, Karnataka, India",
       "salary": "",
       "site": "linkedin",
-      "level": "mid-senior level"
+      "idx": 45
     },
     {
-      "idx": 51,
       "score": 57,
       "title": "Senior Data Product Owner",
       "company": "ProArch",
       "url": "https://www.linkedin.com/jobs/view/4422971885",
-      "date": "Recent",
+      "date": "2026-06-03",
       "role": "Product Owner",
       "location": "Hyderabad, Telangana, India",
       "salary": "",
       "site": "linkedin",
-      "level": "mid-senior level"
+      "idx": 46
     },
     {
-      "idx": 52,
-      "score": 57,
-      "title": "Business Analyst",
-      "company": "Arrowsight Private Limited",
-      "url": "https://in.indeed.com/viewjob?jk=5047f82d5857f68d",
-      "date": "2026-06-04",
-      "role": "Business Analyst",
-      "location": "TS, IN",
-      "salary": "",
-      "site": "indeed",
-      "level": ""
-    },
-    {
-      "idx": 53,
       "score": 57,
       "title": "Senior Product Manager",
       "company": "Aurigo Software Technologies",
@@ -701,10 +575,9 @@
       "location": "Bengaluru, Karnataka, India",
       "salary": "",
       "site": "linkedin",
-      "level": "mid-senior level"
+      "idx": 47
     },
     {
-      "idx": 54,
       "score": 57,
       "title": "Senior Product Manager",
       "company": "Pine Labs",
@@ -714,59 +587,43 @@
       "location": "Bengaluru, Karnataka, India",
       "salary": "",
       "site": "linkedin",
-      "level": "mid-senior level"
+      "idx": 48
     },
     {
-      "idx": 55,
-      "score": 55,
-      "title": "Senior Specialist, Business Analyst \u2013 Customer Master Data (MDM)",
-      "company": "MSD",
-      "url": "https://in.indeed.com/viewjob?jk=e27ead3d12616816",
+      "score": 57,
+      "title": "Business Analyst Insurance",
+      "company": "AvenuesHR Consulting",
+      "url": "https://www.linkedin.com/jobs/view/4419696756",
       "date": "2026-06-03",
-      "role": "Business Analyst",
-      "location": "TS, IN",
-      "salary": "",
-      "site": "indeed",
-      "level": ""
-    },
-    {
-      "idx": 56,
-      "score": 55,
-      "title": "Oracle JD Edwards Mfg, Supply Planning & Procurement Business Analyst",
-      "company": "Thermo Fisher Scientific",
-      "url": "https://in.indeed.com/viewjob?jk=78fef2135b2999da",
-      "date": "2026-06-03",
-      "role": "Business Analyst",
-      "location": "KA, IN",
-      "salary": "",
-      "site": "indeed",
-      "level": ""
-    },
-    {
-      "idx": 57,
-      "score": 55,
-      "title": "Senior Business Analyst",
-      "company": "Riskonnect, Inc.",
-      "url": "https://www.linkedin.com/jobs/view/4404307268",
-      "date": "2026-06-02",
-      "role": "Business Analyst",
-      "location": "Bagalur, Karnataka, India",
-      "salary": "",
-      "site": "linkedin",
-      "level": "mid-senior level"
-    },
-    {
-      "idx": 58,
-      "score": 55,
-      "title": "Consultant Business Analyst",
-      "company": "Societe Generale Global Solution Centre",
-      "url": "https://www.linkedin.com/jobs/view/4404821786",
-      "date": "Recent",
       "role": "Business Analyst",
       "location": "Bengaluru, Karnataka, India",
       "salary": "",
       "site": "linkedin",
-      "level": "entry level"
+      "idx": 49
+    },
+    {
+      "score": 55,
+      "title": "Sr Associate - Business Analyst (Salesforce)",
+      "company": "Amgen",
+      "url": "https://in.indeed.com/viewjob?jk=6b2f7309b333c746",
+      "date": "2026-06-04",
+      "role": "Business Analyst",
+      "location": "TS, IN",
+      "salary": "",
+      "site": "indeed",
+      "idx": 50
+    },
+    {
+      "score": 55,
+      "title": "Consultant Business Analyst",
+      "company": "Societe Generale Global Solution Centre",
+      "url": "https://www.linkedin.com/jobs/view/4404821786",
+      "date": "2026-06-03",
+      "role": "Business Analyst",
+      "location": "Bengaluru, Karnataka, India",
+      "salary": "",
+      "site": "linkedin",
+      "idx": 51
     }
   ]
 }
