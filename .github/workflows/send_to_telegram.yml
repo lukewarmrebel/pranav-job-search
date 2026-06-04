@@ -1,0 +1,32 @@
+name: Send Morning Digest to Telegram
+
+on:
+  push:
+    paths:
+      - 'output/jobs_*.xlsx'
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -U openpyxl
+
+      - name: Send Excel + interactive cards to Telegram
+        continue-on-error: true
+        env:
+          TELEGRAM_TOKEN:   ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          EXCEL=$(ls output/jobs_*.xlsx 2>/dev/null | sort -r | head -1)
+          if [ -z "$EXCEL" ]; then echo "No Excel found"; exit 0; fi
+          EXCEL_PATH="$EXCEL" python3 send_morning_digest.py

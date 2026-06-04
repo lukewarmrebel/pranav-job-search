@@ -32,6 +32,7 @@ Path("data").mkdir(exist_ok=True)
 OFFSET_FILE = "data/update_offset.txt"
 TODAY_JOBS  = "data/today_jobs.json"
 SHORTLIST   = "data/shortlisted.json"
+SKIPPED     = "data/skipped.json"
 MANUAL      = "data/manual_jobs.json"
 SENT_MSGS   = "data/sent_messages.json"
 
@@ -227,6 +228,12 @@ def get_shortlist():
     if sl.get("date") != session_date:
         sl = {"date": session_date, "jobs": []}
     return sl
+
+def get_skipped():
+    sk = load_json(SKIPPED, {"date": session_date, "jobs": []})
+    if sk.get("date") != session_date:
+        sk = {"date": session_date, "jobs": []}
+    return sk
 
 def get_manual():
     m = load_json(MANUAL, {"date": session_date, "entries": []})
@@ -455,6 +462,12 @@ for update in updates:
 
         elif action == "sk":
             answer_callback(cq_id, "❌ Skipped")
+            sk = get_skipped()
+            if not any(j.get("idx") == idx for j in sk["jobs"]):
+                sk["jobs"].append(job)
+                save_json(SKIPPED, sk)
+                state_changed = True
+                debug_lines.append(f"  saved_skipped_count={len(sk['jobs'])}")
             if msg_id:
                 remove_keyboard(msg_id)
 

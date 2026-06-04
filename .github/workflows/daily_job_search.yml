@@ -1,4 +1,4 @@
-name: Daily Job Search
+name: Daily Job Scrape
 
 on:
   schedule:
@@ -25,42 +25,18 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install -U python-jobspy pandas openpyxl
+        run: pip install -U python-jobspy pandas
 
       - name: Run JobSpy scraper
         run: python jobspy_run.py
 
-      - name: Score and save job index
-        run: python score_jobs.py
-
-      # Commit jobs_raw.json + today_jobs.json BEFORE sending Telegram messages
-      # so bot_poll always finds the jobs index even if it runs concurrently
-      - name: Commit scraped + scored data
+      - name: Commit scraped jobs
         run: |
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git config user.name  "github-actions[bot]"
-          mkdir -p data
-          git add jobs_raw.json data/today_jobs.json data/shortlisted.json data/manual_jobs.json
+          git add jobs_raw.json
           git diff --staged --quiet && echo "No changes" || (
-            git commit -m "chore: scored jobs $(date -u +%Y-%m-%d)" &&
-            git pull origin master --rebase &&
-            git push
-          )
-
-      - name: Send job digest to Telegram
-        continue-on-error: true
-        env:
-          TELEGRAM_TOKEN:   ${{ secrets.TELEGRAM_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: python3 telegram_notify.py
-
-      - name: Commit sent_messages.json
-        run: |
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git config user.name  "github-actions[bot]"
-          git add data/sent_messages.json
-          git diff --staged --quiet && echo "No changes" || (
-            git commit -m "chore: sent_messages $(date -u +%Y-%m-%d)" &&
+            git commit -m "scrape: jobs_raw.json $(date -u +%Y-%m-%d)" &&
             git pull origin master --rebase &&
             git push
           )

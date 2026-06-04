@@ -1,0 +1,29 @@
+name: Send Apply List to Telegram
+
+on:
+  push:
+    paths:
+      - 'output/apply_*.xlsx'
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Send apply-list Excel to Telegram
+        continue-on-error: true
+        env:
+          TELEGRAM_TOKEN:   ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          EXCEL=$(ls output/apply_*.xlsx 2>/dev/null | sort -r | head -1)
+          if [ -z "$EXCEL" ]; then echo "No apply list Excel found"; exit 0; fi
+          EXCEL_PATH="$EXCEL" python3 send_apply_list.py
