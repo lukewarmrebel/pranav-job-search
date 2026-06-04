@@ -1,16 +1,16 @@
-name: Daily Job Search
+name: Telegram Bot Poll
 
 on:
   schedule:
-    # 5:00 AM IST = 11:30 PM UTC (prev day)
-    - cron: '30 23 * * *'
+    # every 15 minutes
+    - cron: '*/15 * * * *'
   workflow_dispatch:
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
-  scrape:
+  poll:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -25,28 +25,22 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: |
-          pip install -U python-jobspy pandas openpyxl
+        run: pip install -U openpyxl
 
-      - name: Run JobSpy scraper
-        run: python jobspy_run.py
-
-      - name: Send job digest to Telegram
-        continue-on-error: true
+      - name: Poll Telegram and process updates
         env:
           TELEGRAM_TOKEN:   ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-          JOBS_JSON:        jobs_raw.json
-        run: python3 telegram_notify.py
+        run: python3 bot_poll.py
 
-      - name: Commit & push results
+      - name: Commit state changes
         run: |
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git config user.name  "github-actions[bot]"
           mkdir -p data
-          git add jobs_raw.json data/
-          git diff --staged --quiet && echo "No changes, skipping commit" || (
-            git commit -m "chore: job search results $(date -u +%Y-%m-%d)" &&
+          git add data/
+          git diff --staged --quiet && echo "No changes" || (
+            git commit -m "bot: state update $(date -u +%Y-%m-%dT%H:%M)" &&
             git pull origin main --rebase 2>/dev/null || git pull origin master --rebase &&
             git push
           )
