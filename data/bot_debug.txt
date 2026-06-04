@@ -1,8 +1,9 @@
-run_at=2026-06-04T15:41:48.603505
-offset_in=414870043
-updates_count=1
-jobs_loaded=59
+run_at=2026-06-04T18:00:43.950591
+offset_in=414870054
+updates_count=2
+jobs_loaded=52
 session_date=2026-06-04
-message uid=414870053 text='/apply' chat=334399855
-offset_out=414870054
-state_changed=False
+message uid=414870054 text='https://www.linkedin.com/safety/go?messa' chat=334399855
+message uid=414870055 text='Careers at Kenvue | Apply for Lead Produ' chat=334399855
+offset_out=414870056
+state_changed=True
