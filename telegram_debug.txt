@@ -1,0 +1,32 @@
+TOKEN length: 46
+CHAT_ID: 334399855
+--- getMe ---
+{
+    "ok": true,
+    "result": {
+        "id": 8890262633,
+        "is_bot": true,
+        "first_name": "Claude jobs bot",
+        "username": "jobspersonalbot",
+        "can_join_groups": true,
+        "can_read_all_group_messages": false,
+        "supports_inline_queries": false,
+        "supports_guest_queries": false,
+        "can_connect_to_business": false,
+        "has_main_web_app": false,
+        "has_topics_enabled": false,
+        "allows_users_to_create_topics": false,
+        "can_manage_bots": false
+    }
+}
+--- sendMessage ---
+{
+    "ok": false,
+    "error_code": 400,
+    "description": "Bad Request: chat not found"
+}
+--- getUpdates (last 5) ---
+{
+    "ok": true,
+    "result": []
+}
