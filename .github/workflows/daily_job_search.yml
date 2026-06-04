@@ -31,6 +31,13 @@ jobs:
       - name: Run JobSpy scraper
         run: python jobspy_run.py
 
+      - name: Send job digest to Telegram
+        env:
+          TELEGRAM_TOKEN:   ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          JOBS_JSON:        jobs_raw.json
+        run: python3 telegram_notify.py
+
       - name: Commit & push results
         run: |
           git config user.email "github-actions[bot]@users.noreply.github.com"
