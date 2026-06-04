@@ -33,6 +33,7 @@ Claude does all the intelligent work: scoring, enrichment, Excel generation.
    ```
    For top-10 Tier 2 candidates by title score, call `mcp__Indeed__get_job_details` for full JD.
    Deduplicate Tier 1 + Tier 2 combined. Source preference for duplicates: LinkedIn > Glassdoor > Naukri > Indeed.
+   **Tier 2 date filter:** Include if `date_posted` is within last **7 days** of run_date (Indeed MCP rarely returns same-day jobs; 7-day window is practical). Exclude if older.
 
 4. **Score every job** using the rubric below. Skip anything scoring < 55.
 
@@ -288,11 +289,11 @@ Platform: Motor Claims — AI Inspection, Fraud Detection, OEM Integrations, Omn
 | J | **Posted (Hrs Ago)** | Calculated at time of run |
 | K | **Match Score** | 0–100 per rubric |
 | L | **Match Reason** | 2–3 lines citing SPECIFIC JD phrases. Reference Pranav's achievements where relevant. Flag ⚡ if posted by named individual |
-| M | **Interview Likelihood** | High (score ≥75 + strong domain fit) / Medium / Low |
+| M | **Interview Likelihood** | High = score ≥75 AND domain clearly matches (insurance/BFSI/AI PM); Medium = score 60–74 OR score ≥75 with weak domain fit; Low = score 55–59 |
 | N | **Best Resume Variant** | From Resume Variants table above |
 | O | **Apply Link** | Direct URL — hyperlinked |
 | P | **Job ID** | Platform Job ID from URL or scraper |
-| Q | **Recruiter / Poster LinkedIn** | `linkedin.com/in/...` only — "Not Available" if not found |
+| Q | **Recruiter / Poster LinkedIn** | `linkedin.com/in/...` only if explicitly visible in the job listing (e.g. LinkedIn "Posted by" field). Default to "Not Available" — scraper data does not include this; do not attempt to infer or search |
 | R | **Employees Search Link** | `https://www.linkedin.com/search/results/people/?keywords=%22[Company]%22` |
 | S | **Job Description** | Full JD if enriched via get_job_details; otherwise first 2000 chars from JobSpy |
 
