@@ -21,12 +21,105 @@ CHAT_ID: 334399855
 }
 --- sendMessage ---
 {
-    "ok": false,
-    "error_code": 400,
-    "description": "Bad Request: chat not found"
+    "ok": true,
+    "result": {
+        "message_id": 5,
+        "from": {
+            "id": 8890262633,
+            "is_bot": true,
+            "first_name": "Claude jobs bot",
+            "username": "jobspersonalbot"
+        },
+        "chat": {
+            "id": 334399855,
+            "first_name": "lukewarm",
+            "last_name": "Rebel",
+            "username": "lukewarmrebel",
+            "type": "private"
+        },
+        "date": 1780573885,
+        "text": "\ud83d\udd27 Debug test from GitHub Actions"
+    }
 }
 --- getUpdates (last 5) ---
 {
     "ok": true,
-    "result": []
+    "result": [
+        {
+            "update_id": 414869996,
+            "message": {
+                "message_id": 2,
+                "from": {
+                    "id": 334399855,
+                    "is_bot": false,
+                    "first_name": "lukewarm",
+                    "last_name": "Rebel",
+                    "username": "lukewarmrebel",
+                    "language_code": "en"
+                },
+                "chat": {
+                    "id": 334399855,
+                    "first_name": "lukewarm",
+                    "last_name": "Rebel",
+                    "username": "lukewarmrebel",
+                    "type": "private"
+                },
+                "date": 1780573739,
+                "text": "/start",
+                "entities": [
+                    {
+                        "offset": 0,
+                        "length": 6,
+                        "type": "bot_command"
+                    }
+                ]
+            }
+        },
+        {
+            "update_id": 414869997,
+            "message": {
+                "message_id": 3,
+                "from": {
+                    "id": 334399855,
+                    "is_bot": false,
+                    "first_name": "lukewarm",
+                    "last_name": "Rebel",
+                    "username": "lukewarmrebel",
+                    "language_code": "en"
+                },
+                "chat": {
+                    "id": 334399855,
+                    "first_name": "lukewarm",
+                    "last_name": "Rebel",
+                    "username": "lukewarmrebel",
+                    "type": "private"
+                },
+                "date": 1780573743,
+                "text": "Hi"
+            }
+        },
+        {
+            "update_id": 414869998,
+            "message": {
+                "message_id": 4,
+                "from": {
+                    "id": 334399855,
+                    "is_bot": false,
+                    "first_name": "lukewarm",
+                    "last_name": "Rebel",
+                    "username": "lukewarmrebel",
+                    "language_code": "en"
+                },
+                "chat": {
+                    "id": 334399855,
+                    "first_name": "lukewarm",
+                    "last_name": "Rebel",
+                    "username": "lukewarmrebel",
+                    "type": "private"
+                },
+                "date": 1780573744,
+                "text": "Mf"
+            }
+        }
+    ]
 }
