@@ -37,12 +37,17 @@ jobs:
           TELEGRAM_TOKEN:   ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
-          echo "TOKEN length: ${#TELEGRAM_TOKEN}"
-          echo "CHAT_ID: $TELEGRAM_CHAT_ID"
+          echo "TOKEN length: ${#TELEGRAM_TOKEN}" | tee telegram_debug.txt
+          echo "CHAT_ID: $TELEGRAM_CHAT_ID" | tee -a telegram_debug.txt
+          echo "--- getMe ---" | tee -a telegram_debug.txt
+          curl -s "https://api.telegram.org/bot${TELEGRAM_TOKEN}/getMe" | python3 -m json.tool | tee -a telegram_debug.txt
+          echo "--- sendMessage ---" | tee -a telegram_debug.txt
           curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage" \
             -H "Content-Type: application/json" \
             -d "{\"chat_id\":\"${TELEGRAM_CHAT_ID}\",\"text\":\"🔧 Debug test from GitHub Actions\"}" \
-            | python3 -m json.tool
+            | python3 -m json.tool | tee -a telegram_debug.txt
+          echo "--- getUpdates (last 5) ---" | tee -a telegram_debug.txt
+          curl -s "https://api.telegram.org/bot${TELEGRAM_TOKEN}/getUpdates?limit=5" | python3 -m json.tool | tee -a telegram_debug.txt
 
       - name: Send job digest to Telegram
         continue-on-error: true
@@ -56,7 +61,6 @@ jobs:
         run: |
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
-          git add jobs_raw.json
-          # Only commit if the file actually changed
-          git diff --staged --quiet && echo "No new jobs, skipping commit" || \
+          git add jobs_raw.json telegram_debug.txt || true
+          git diff --staged --quiet && echo "No changes, skipping commit" || \
             git commit -m "chore: job search results $(date -u +%Y-%m-%d)" && git push
